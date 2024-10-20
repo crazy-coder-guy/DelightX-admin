@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>DelightX - Add Product</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">QuickBuy</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="inventory.html">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="order.html">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pending</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h2>Add Product</h2>
+    <form id="productForm">
+        <div class="mb-3">
+            <label for="productName" class="form-label">Product Name</label>
+            <select class="form-select" id="productName" required>
+            <option value="">Select Product</option>
+            <option value="Aashirvad Ghee">Aashirvad Ghee</option>
+            <option value="Amul Cow Ghee">Amul Cow Ghee</option>
+            <option value="Aavin Agmark Ghee">Aavin Agmark Ghee</option>
+            <option value="Cardia Groundnut Oil">Cardia Groundnut Oil</option>
+            <option value="Muyal Castor Oil">Muyal Castor Oil</option>
+            <option value="Mr.Gold Gingelly Oil">Mr.Gold Gingelly Oil</option>
+            <option value="Poorna Coconut Oil">Poorna Coconut Oil</option>
+            <option value="Mr.Gold Groundnut Oil">Mr.Gold Groundnut Oil</option>
+            <option value="Mr.Gold Refined Sunflower Oil">Mr.Gold Refined Sunflower Oil</option>
+            <option value="Gold Winner Refined Sunflower Oil">Gold Winner Refined Sunflower Oil</option>
+            <option value="Usha Refined Sunflower Oil">Usha Refined Sunflower Oil</option>
+            <option value="Sunland Refined Sunflower Oil">Sunland Refined Sunflower Oil</option>
+            <option value="Saffola Active Multisource Edible Oil">Saffola Active Multisource Edible Oil</option>
+            <option value="Saffola Gold Multisource Edible Oil">Saffola Gold Multisource Edible Oil</option>
+            <option value="Saffola Tasty Multisource Edible Oil">Saffola Tasty Multisource Edible Oil</option>
+            <option value="Saffola Total Multisource Edible Oil">Saffola Total Multisource Edible Oil</option>
+            <option value="Fortune Sunflower Oil">Fortune Sunflower Oil</option>
+            <option value="TSR Groundnut Oil">TSR Groundnut Oil</option>
+            <option value="Poorna Rice Bran Oil">Poorna Rice Bran Oil</option>
+            <option value="Idhayam Gingelly Oil">Idhayam Gingelly Oil</option>
+            <option value="Maggi Noodles 8Pcs">Maggi Noodles 8Pcs</option>
+            <option value="Maggi Noodles 6Pcs">Maggi Noodles 6Pcs</option>
+            <option value="Maggi Noodles 2Pcs">Maggi Noodles 2Pcs</option>
+            <option value="Maggi Noodles 1Pcs">Maggi Noodles 1Ps</option>
+            <option value="Top Ramen 8Pcs">Top Ramen 8Pcs</option>
+            <option value="Top Ramen 6Pcs">Top Ramen 6Pcs</option>
+            <option value="Top Ramen 4Pcs">Top Ramen 4Pcs</option>
+            <option value="Top Ramen 1Pc">Top Ramen 1Ps</option>
+            <option value="Top Ramen Curry 8Pcs">Top Ramen Curry 8Pcs</option>
+            <option value="Top Ramen Curry 6Pcs">Top Ramen Curry 6Pcs</option>
+            <option value="Top Ramen Curry 4Pcs">Top Ramen Curry 4Pcs</option>
+            <option value="Top Ramen Curry 2Pcs">Top Ramen Curry 2Pcs</option>
+            <option value="Top Ramen Curry 1Pc">Top Ramen Curry 1Ps</option>
+            <option value="Yippee Noodles 6Pcs">Yippee Noodles 6Pcs</option>
+            <option value="Yippee Noodles 4Pcs">Yippee Noodles 4Pcs</option>
+            <option value="Yippee Noodles 2Pcs">Yippee Noodles 2Pcs</option>
+            <option value="Yippee Noodles 1Pc">Yippee Noodles 1Ps</option>
+            <option value="Hellmann's Mayonnaise">Hellmann's Mayonnaise</option>
+            <option value="Kissan Peanut Butter Crunchy">Kissan Peanut Butter Crunchy</option>
+            <option value="Sundrop Peanut Butter Creamy">Sundrop Peanut Butter Creamy</option>
+            <option value="Sundrop Peanut Butter Crunchy">Sundrop Peanut Butter Crunchy</option>
+            <option value="Milk Maid (Mini)">Milk Maid (Mini)</option>
+            <option value="Milk Maid (Tin)">Milk Maid (Tin)</option>
+            <option value="Hershey's Spread (Cocoa)">Hershey's Spread (Cocoa)</option>
+            <option value="Hershey's Spread (Cocoa) Almond">Hershey's Spread (Cocoa) Almond</option>
+            <option value="Hershey's Spread (Cocoa) Powder">Hershey's Spread (Cocoa) Powder</option>
+            <option value="Hershey's Hot Chocolate">Hershey's Hot Chocolate</option>
+            <option value="Hershey's Spread (Cocoa) Cookies">Hershey's Spread (Cocoa) Cookies</option>
+            <option value="Hershey's Syrup Chocolate">Hershey's Syrup Chocolate</option>
+            <option value="Hershey's Syrup Strawberry">Hershey's Syrup Strawberry</option>
+            <option value="Hershey's Syrup Caramel">Hershey's Syrup Caramel</option>
+            <option value="Nutella Chocolate Spread">Nutella Chocolate Spread</option>
+            <option value="Dabur Honey">Dabur Honey</option>
+            <option value="Kissan Jam Mixed Fruit">Kissan Jam Mixed Fruit</option>
+            <option value="Aachi Jam Mixed Fruit">Aachi Jam Mixed Fruit</option>
+            <option value="Lion Jam Mixed Fruit">Lion Jam Mixed Fruit</option>
+            <option value="Patanjali Honey">Patanjali Honey</option>
+            <option value="Lion Dates Syrup">Lion Dates Syrup</option>
+            <option value="Aachi Garlic Pickle">Aachi Garlic Pickle</option>
+            <option value="Aachi Lime Pickle">Aachi Lime Pickle</option>
+            <option value="Aachi Mixed Pickle">Aachi Mixed Pickle</option>
+            <option value="Aachi Mango Thokku Pickle">Aachi Mango Thokku Pickle</option>
+            <option value="VVD Gold Coconut Oil">VVD Gold Coconut Oil</option>
+            <option value="Savorite Vermicelli">Savorite Vermicelli</option>
+            <option value="Indian Chef Red Chilli Sauce">Indian Chef Red Chilli Sauce</option>
+            <option value="Vijay Soya Sauce">Vijay Soya Sauce</option>
+            <option value="Vijay Chilli Sauce">Vijay Chilli Sauce</option>
+            <option value="Maggi Tomato Ketchup">Maggi Tomato Ketchup</option>
+            <option value="Maggi Hot and Sweet">Maggi Hot and Sweet</option>
+            <option value="Parachute Coconut Oil">Parachute Coconut Oil</option>
+            <option value="Supreme Vermicelli">Supreme Vermicelli</option>
+            <option value="Ashirvad Vermicelli">Ashirvad Vermicelli</option>
+            <option value="Anil Rice Vermicelli">Anil Rice Vermicelli</option>
+            <option value="Anil Lemon Vermicelli">Anil Lemon Vermicelli</option>
+            <option value="Anil Kodo Millet Vermicelli">Anil Kodo Millet Vermicelli</option>
+            <option value="Anil Wheat Vermicelli">Anil Wheat Vermicelli</option>
+            <option value="Anil Foxtail Vermicelli">Anil Foxtail Vermicelli</option>
+            <option value="Anil Biryani Vermicelli">Anil Biryani Vermicelli</option>
+            <option value="SRM Noodles">SRM Noodles</option>
+            <option value="Surya Noodles">Surya Noodles</option>
+            
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="productImage" class="form-label">Product Image</label>
+            <input type="file" class="form-control" id="productImage" accept="image/*" required>
+        </div>
+        <div class="mb-3">
+            <label for="qtyUnit" class="form-label">Quantity Unit</label>
+            <select class="form-select" id="qtyUnit" required>
+                <option value="kg">Kg</option>
+                <option value="g">Gram</option>
+                <option value="ltr">Liter</option>
+                <option value="ml">Milliliter</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="quantity" required step="any">
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select" id="category" required>
+            <option value="Ghee">Ghee</option>
+            <option value="Crunchies">Crunchies</option>
+            <option value="Namkeen">Namkeen</option>
+            <option value="Biscuits">Biscuits</option>
+            <option value="Sweets">Sweets</option>
+            <option value="Chocolate">Chocolate</option>
+            <option value="Cookies">Cookies</option>
+            <option value="Granola Bars">Granola Bars</option>
+            <option value="Cooking Oils">Cooking Oils</option>
+            <option value="Spices and Seasonings">Spices and Seasonings</option>
+            <option value="Sauces">Sauces</option>
+            <option value="Pasta and Noodles">Pasta and Noodles</option>
+            <option value="Rice and Grains">Rice and Grains</option>
+            <option value="Canned Goods">Canned Goods</option>
+            <option value="Skincare">Skincare</option>
+            <option value="Hair Care">Hair Care</option>
+            <option value="Oral Care">Oral Care</option>
+            <option value="Bath and Body">Bath and Body</option>
+            <option value="Fragrances">Fragrances</option>
+            <option value="Feminine Hygiene">Feminine Hygiene</option>
+            <option value="Cheese">Cheese</option>
+            <option value="Butter and Margarine">Butter and Margarine</option>
+            <option value="Dairy Alternatives">Dairy Alternatives</option>
+            <option value="Soft Drinks">Soft Drinks</option>
+            <option value="Energy Drinks">Energy Drinks</option>
+            <option value="Tea and Coffee">Tea and Coffee</option>
+            <option value="Health Drinks">Health Drinks</option>
+            <option value="Cleaning Supplies">Cleaning Supplies</option>
+            <option value="Kitchenware">Kitchenware</option>
+            <option value="Laundry Essentials">Laundry Essentials</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="city" class="form-label">City</label>
+            <select class="form-select" id="city" required>
+                <option value="Thokkavadi" data-lat="11.3605234" data-lng="77.8274578">Thokkavadi</option>
+                <option value="Kondalampatty" data-lat="11.6305" data-lng="78.1251">Kondalampatty</option>
+                <option value="Salem" data-lat="11.6643" data-lng="78.1460">Salem</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="stockAvailable" class="form-label">Stock Available</label>
+            <input type="number" class="form-control" id="stockAvailable" required>
+        </div>
+        <div class="mb-3">
+            <label for="originalPrice" class="form-label">Original Price</label>
+            <input type="number" class="form-control" id="originalPrice" required>
+        </div>
+        <div class="mb-3">
+            <label for="listingPrice" class="form-label">Listing Price</label>
+            <input type="number" class="form-control" id="listingPrice" required>
+        </div>
+        <div class="mb-3">
+            <label for="finalPrice" class="form-label">Final Price</label>
+            <input type="number" class="form-control" id="finalPrice" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="discount" class="form-label">Discount</label>
+            <input type="text" class="form-control" id="discount" disabled>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Availability</label>
+            <div>
+                <select class="form-select" id="availability" required>
+                    <option value="available">Available</option>
+                    <option value="notAvailable">Not Available</option>
+                </select>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="productType" class="form-label">Product Type</label>
+            <select class="form-select" id="productType" required>
+                <option value="new">New</option>
+                <option value="bestPrice">Best Price</option>
+                <option value="bestSeller">Best Seller</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="latitude" class="form-label">Latitude</label>
+            <input type="text" class="form-control" id="latitude" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="longitude" class="form-label">Longitude</label>
+            <input type="text" class="form-control" id="longitude" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="timestamp" class="form-label">Timestamp</label>
+            <input type="text" class="form-control" id="timestamp" disabled>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
+    import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-storage.js";
+
+    // Your Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBjZDiWXkOclw7RmmU31822nPuj9px1hSA",
+        authDomain: "quickbuy-29329.firebaseapp.com",
+        projectId: "quickbuy-29329",
+        storageBucket: "quickbuy-29329.appspot.com",
+        messagingSenderId: "956510631625",
+        appId: "1:956510631625:web:678411a2530ef065b97f18"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const storage = getStorage(app);
+
+    const form = document.getElementById('productForm');
+    const finalPriceInput = document.getElementById('finalPrice');
+    const discountInput = document.getElementById('discount');
+    const timestampInput = document.getElementById('timestamp');
+    const latitudeInput = document.getElementById('latitude');
+    const longitudeInput = document.getElementById('longitude');
+    const citySelect = document.getElementById('city');
+
+    // Function to generate a UUID
+    function generateUUID() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            const r = Math.random() * 16 | 0,
+                v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+
+    // Event listener for city change to update latitude and longitude
+    citySelect.addEventListener('change', function() {
+        const selectedOption = citySelect.options[citySelect.selectedIndex];
+        latitudeInput.value = selectedOption.getAttribute('data-lat');
+        longitudeInput.value = selectedOption.getAttribute('data-lng');
+    });
+
+    // Event listener for form submission
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const productData = {
+            productName: document.getElementById('productName').value,
+            qtyUnit: document.getElementById('qtyUnit').value,
+            quantity: document.getElementById('quantity').value,
+            category: document.getElementById('category').value,
+            city: document.getElementById('city').value,
+            latitude: latitudeInput.value,
+            longitude: longitudeInput.value,
+            stockAvailable: document.getElementById('stockAvailable').value,
+            originalPrice: document.getElementById('originalPrice').value,
+            listingPrice: document.getElementById('listingPrice').value,
+            finalPrice: finalPriceInput.value,
+            availability: document.getElementById('availability').value,
+            productType: document.getElementById('productType').value,
+            timestamp: new Date().toISOString() // Add the current timestamp
+        };
+
+        const imageFile = document.getElementById('productImage').files[0];
+        if (imageFile) {
+            uploadImage(imageFile).then(imageURL => {
+                productData.imageURL = imageURL; // Add the image URL to product data
+                addProduct(productData);
+            });
+        } else {
+            addProduct(productData);
+        }
+    });
+
+    // Function to upload image to Firebase Storage
+    function uploadImage(file) {
+        const storagePath = `product_images/${generateUUID()}_${file.name}`;
+        const storageReference = storageRef(storage, storagePath);
+        return uploadBytes(storageReference, file).then(() => getDownloadURL(storageReference));
+    }
+
+    // Function to add product to Firebase
+    function addProduct(product) {
+        const productId = generateUUID();
+        const productRef = ref(database, 'products/' + productId);
+        set(productRef, product)
+            .then(() => {
+                alert('Product added successfully!');
+                form.reset();
+                timestampInput.value = ''; // Clear the timestamp input after submission
+                latitudeInput.value = ''; // Clear latitude input after submission
+                longitudeInput.value = ''; // Clear longitude input after submission
+            })
+            .catch((error) => {
+                alert('Error adding product: ' + error);
+            });
+    }
+
+    // Function to calculate final price and discount
+    function calculateFinalPrice() {
+        const originalPrice = parseFloat(document.getElementById('originalPrice').value) || 0;
+        const listingPrice = parseFloat(document.getElementById('listingPrice').value) || 0;
+        const discount = originalPrice - listingPrice;
+
+        finalPriceInput.value = listingPrice;
+        discountInput.value = discount > 0 ? discount : 0;
+    }
+
+    // Event listeners for price inputs
+    document.getElementById('originalPrice').addEventListener('input', calculateFinalPrice);
+    document.getElementById('listingPrice').addEventListener('input', calculateFinalPrice);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
