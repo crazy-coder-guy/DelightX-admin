@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>QuickBuy - Inventory</title>
+    <style>
+        @media (max-width: 768px) {
+            .table-responsive {
+                overflow-x: auto;
+            }
+            .fixed-column {
+                position: sticky;
+                left: 0;
+                background-color: white;
+                z-index: 1;
+            }
+        }
+        .btn {
+    margin-right: 5px; /* Add space between buttons if needed */
+}
+
+/* Adjust the flex container for better alignment */
+td div {
+    display: flex;
+    justify-content: space-between;
+}
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">QuickBuy</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="inventory.html">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="order.html">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pending</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-0">
+    <h2>Listed Products</h2>
+    <div class="mb-3">
+        <label for="locationFilter" class="form-label">Filter by City</label>
+        <select class="form-select" id="locationFilter" onchange="filterProducts()">
+            <option value="all">All Cities</option>
+            <option value="Thokkavadi">Thokkavadi</option>
+            <option value="Kondalampatty">Kondalampatty</option>
+            <option value="Salem">Salem</option>
+        </select>
+    </div>
+    
+    <div class="mb-3">
+        <label for="searchField" class="form-label">Search Products</label>
+        <input type="text" id="searchField" class="form-control" onkeyup="filterProducts()" placeholder="Search by product name...">
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr class="text-align">
+                    <th class="fixed-column">Product Name</th>
+                    <th>Stock Available</th>
+                    <th>Original Price</th>
+                    <th>Final Price</th>
+                    <th>Status</th>
+                    <th>Last Updated</th>
+                    <th>Modified</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="products"></tbody>
+        </table>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+    import { getDatabase, ref, get, remove, update } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBjZDiWXkOclw7RmmU31822nPuj9px1hSA",
+        authDomain: "quickbuy-29329.firebaseapp.com",
+        projectId: "quickbuy-29329",
+        storageBucket: "quickbuy-29329.appspot.com",
+        messagingSenderId: "956510631625",
+        appId: "1:956510631625:web:678411a2530ef065b97f18"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    async function fetchProducts() {
+            const productsRef = ref(database, 'products/');
+            const snapshot = await get(productsRef);
+            const productsTbody = document.getElementById('products');
+            const locationFilter = document.getElementById('locationFilter').value;
+            const searchTerm = document.getElementById('searchField').value.toLowerCase();
+
+            productsTbody.innerHTML = ''; // Clear existing products
+
+            // Convert snapshot to array for sorting
+            const productsArray = [];
+            snapshot.forEach(childSnapshot => {
+                const product = childSnapshot.val();
+                const productId = childSnapshot.key;
+                productsArray.push({ ...product, id: productId });
+            });
+
+            // Sort products: low stock (< 5) first, then by stock amount
+            productsArray.sort((a, b) => {
+                const aLowStock = a.stockAvailable < 5;
+                const bLowStock = b.stockAvailable < 5;
+                if (aLowStock && !bLowStock) return -1;
+                if (!aLowStock && bLowStock) return 1;
+                return a.stockAvailable - b.stockAvailable;
+            });
+
+            productsArray.forEach(product => {
+                if ((locationFilter === 'all' || product.city === locationFilter) &&
+                    product.productName.toLowerCase().includes(searchTerm)) {
+                    const productRow = document.createElement('tr');
+                    productRow.id = `product-${product.id}`;
+
+                    // Add background color for low stock items
+                    if (product.stockAvailable < 5) {
+                        productRow.style.backgroundColor = '#FFCCCB'; // creamy red
+                        productRow.style.color = 'black';
+                    }
+
+                    productRow.innerHTML = `
+                        <td class="fixed-column"><strong>${product.productName}</strong></td>
+                        <td>
+                            <input type="number" id="stock-${product.id}" class="form-control" value="${product.stockAvailable}" style="width: 100px; display: inline-block;">
+                        </td>
+                        <td>₹${product.originalPrice}</td>
+                        <td>
+                            <input type="number" id="finalPrice-${product.id}" class="form-control" value="${product.finalPrice}" style="width: 100px; display: inline-block;">
+                        </td>
+                        <td>
+                            <select id="status-${product.id}" class="form-select" style="width: 120px; display: inline-block;">
+                                <option value="new" ${product.status === 'new' ? 'selected' : ''}>New</option>
+                                <option value="bestPrice" ${product.status === 'bestPrice' ? 'selected' : ''}>Best Price</option>
+                                <option value="bestSeller" ${product.status === 'bestSeller' ? 'selected' : ''}>Best Seller</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select id="productType-${product.id}" class="form-select" style="width: 120px; display: inline-block;">
+                                <option value="bestPrice" ${product.productType === 'bestPrice' ? 'selected' : ''}>Best Price</option>
+                                <option value="new" ${product.productType === 'new' ? 'selected' : ''}>New</option>
+                                <option value="bestDeal" ${product.productType === 'bestDeal' ? 'selected' : ''}>Best Deal</option>
+                            </select>
+                        </td>
+                        <td>${product.lastUpdated ? new Date(product.lastUpdated).toLocaleString() : 'Not updated yet'}</td>
+                        <td>
+                            <div style="display: flex; justify-content: space-between;">
+                                <button class="btn btn-primary" onclick="updateProduct('${product.id}')">
+                                    <i class="fa fa-refresh" aria-hidden="true"></i> Update
+                                </button>
+                                <button class="btn btn-danger" onclick="showMoreOptions('${product.id}')">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    productsTbody.appendChild(productRow);
+                }
+            });
+        }
+
+        window.filterProducts = function() {
+            fetchProducts(); // Re-fetch products based on selected filter and search term
+        };
+
+    window.filterProducts = function() {
+        fetchProducts(); // Re-fetch products based on selected filter
+    };
+
+
+
+    window.showMoreOptions = function(productId) {
+        const confirmation = confirm('Are you sure you want to delete this product?');
+        if (confirmation) {
+            deleteProduct(productId);
+        }
+    };
+
+    function deleteProduct(productId) {
+        const productRef = ref(database, 'products/' + productId);
+        remove(productRef)
+            .then(() => {
+                alert('Product deleted successfully!');
+                fetchProducts(); // Refresh the product list after deletion
+            })
+            .catch((error) => {
+                alert('Error deleting product: ' + error);
+            });
+    }
+
+    window.updateProduct = function(productId) {
+    const newStock = document.getElementById(`stock-${productId}`).value;
+    const newFinalPrice = document.getElementById(`finalPrice-${productId}`).value;
+    const newStatus = document.getElementById(`status-${productId}`).value; // Capture selected status
+    const newProductType = document.getElementById(`productType-${productId}`).value; // Capture product type
+
+    const productRow = document.getElementById(`product-${productId}`);
+    const productName = productRow.querySelector('strong').textContent;
+
+    const productRef = ref(database, 'products/' + productId);
+    const currentTimestamp = new Date().toISOString();
+
+    // Log the product details being updated for debugging
+    console.log('Updating product:', productId, 'with status:', newStatus, 'and type:', newProductType);
+
+    update(productRef, { 
+        productName: productName,
+        stockAvailable: parseInt(newStock),
+        finalPrice: parseFloat(newFinalPrice),
+        status: newStatus, // Ensure the correct status is being set
+        lastUpdated: Date.now(),
+        productType: newProductType, // Update product type
+        timestamp: currentTimestamp
+    })
+    .then(() => {
+        alert('Product updated successfully!');
+        fetchProducts(); // Refresh the product list after update
+    })
+    .catch((error) => {
+        alert('Error updating product: ' + error);
+    });
+};
+
+
+    fetchProducts();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
